@@ -7,15 +7,16 @@ export function StartScreen({ onStart }: StartScreenProps) {
     <div 
       className="flex flex-col items-center justify-center min-h-full p-6 relative overflow-hidden"
       style={{
-        background: 'radial-gradient(circle at center, #ffffff 0%, #fafaf9 100%)'
+        background: 'radial-gradient(circle at center, var(--color-bg-gradient-start) 0%, var(--color-bg-base) 100%)'
       }}
     >
       {/* Subtle dot pattern background */}
       <div 
-        className="absolute inset-0 opacity-[0.07]"
+        className="absolute inset-0"
         style={{
           backgroundImage: 'radial-gradient(circle, #000000 1px, transparent 1px)',
-          backgroundSize: '32px 32px'
+          backgroundSize: '32px 32px',
+          opacity: 'var(--dot-pattern-opacity)'
         }}
         aria-hidden="true"
       />
@@ -153,16 +154,9 @@ export function StartScreen({ onStart }: StartScreenProps) {
         >
           <button
             onClick={onStart}
-            className="px-12 py-4 rounded-xl font-display font-medium text-lg text-white transition-all duration-300 hover:shadow-md active:scale-[0.98]"
+            className="px-12 py-4 rounded-xl font-display font-medium text-lg text-white transition-all duration-300 hover:shadow-md active:scale-[0.98] shadow-sm"
             style={{ 
               backgroundColor: 'var(--color-accent)',
-              boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = '0 1px 2px 0 rgb(0 0 0 / 0.05)';
             }}
             aria-label="Start playing Social Bingo"
           >

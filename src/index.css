@@ -8,9 +8,13 @@
   --color-bingo: #fbbf24;
   --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
   --color-bg-base: #fafaf9;
+  --color-bg-gradient-start: #ffffff;
   --color-text-primary: #1a1a1a;
   --color-text-secondary: #737373;
   --color-text-tertiary: #a3a3a3;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --dot-pattern-opacity: 0.07;
 }
 
 @keyframes fadeInUp {
