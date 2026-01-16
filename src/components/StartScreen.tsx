@@ -4,23 +4,24 @@ interface StartScreenProps {
 
 export function StartScreen({ onStart }: StartScreenProps) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-full p-6 bg-gray-50">
-      <div className="text-center max-w-sm">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">Soc Ops</h1>
-        <p className="text-lg text-gray-600 mb-8">Social Bingo</p>
+    <div className="flex flex-col items-center justify-center min-h-full p-8 bg-mono-50">
+      <div className="text-center max-w-md w-full">
+        <div className="mb-16">
+          <h1 className="text-[3.5rem] font-normal tracking-tight text-mono-950 mb-1 leading-none">SOC OPS</h1>
+          <div className="h-px bg-mono-900 w-16 mx-auto mb-3"></div>
+          <p className="text-sm uppercase tracking-[0.2em] text-mono-600 font-light">Social Bingo</p>
+        </div>
         
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-8">
-          <h2 className="font-semibold text-gray-800 mb-3">How to play</h2>
-          <ul className="text-left text-gray-600 text-sm space-y-2">
-            <li>• Find people who match the questions</li>
-            <li>• Tap a square when you find a match</li>
-            <li>• Get 5 in a row to win!</li>
-          </ul>
+        <div className="mb-12 space-y-3 text-mono-700">
+          <p className="text-xs uppercase tracking-wider font-medium mb-4 text-mono-500">Instructions</p>
+          <p className="text-sm leading-relaxed">Find people who match the questions</p>
+          <p className="text-sm leading-relaxed">Mark squares when you find matches</p>
+          <p className="text-sm leading-relaxed">Complete five in a row to win</p>
         </div>
 
         <button
           onClick={onStart}
-          className="w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors"
+          className="w-full border-2 border-mono-900 bg-mono-900 text-mono-50 font-medium py-4 px-8 text-sm uppercase tracking-[0.15em] transition-all duration-200 hover:bg-mono-950 active:scale-[0.98]"
         >
           Start Game
         </button>
