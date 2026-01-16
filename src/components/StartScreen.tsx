@@ -6,7 +6,12 @@ export function StartScreen({ onStart }: StartScreenProps) {
   return (
     <div className="relative flex flex-col items-center justify-center min-h-full p-6 bg-cream overflow-hidden">
       {/* Subtle gradient accent in corner */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-radial from-mustard/10 to-transparent blur-3xl pointer-events-none" />
+      <div 
+        className="absolute top-0 right-0 w-96 h-96 blur-3xl pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(202, 138, 4, 0.1) 0%, transparent 70%)',
+        }}
+      />
       
       {/* Paper texture overlay */}
       <div 
