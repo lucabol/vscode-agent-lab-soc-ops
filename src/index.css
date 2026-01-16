@@ -1,11 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
 @import 'tailwindcss';
 
 @theme {
-  --color-accent: #2563eb;
-  --color-accent-light: #3b82f6;
-  --color-marked: #dcfce7;
-  --color-marked-border: #22c55e;
-  --color-bingo: #fbbf24;
+  --color-vintage-cream: #f4e8d8;
+  --color-vintage-paper: #e8dcc4;
+  --color-vintage-burgundy: #6b2e2e;
+  --color-vintage-burgundy-dark: #4a1f1f;
+  --color-vintage-forest: #2d4a2f;
+  --color-vintage-gold: #c9a961;
+  --color-vintage-gold-dark: #9a7b3f;
+  --color-vintage-brown: #4a3427;
+  --color-vintage-border: #8b7355;
+  --color-marked: #d4c5a9;
+  --color-marked-border: #9a7b3f;
+  --color-bingo: #c9a961;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Crimson Text', serif;
 }
 
 html,
@@ -16,6 +26,53 @@ body,
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
   -webkit-tap-highlight-color: transparent;
+  background: var(--color-vintage-cream);
+}
+
+/* Vintage decorative elements */
+.vintage-ornament {
+  position: relative;
+}
+
+.vintage-ornament::before,
+.vintage-ornament::after {
+  content: '❦';
+  position: absolute;
+  color: var(--color-vintage-gold);
+  font-size: 1.5rem;
+  opacity: 0.6;
+}
+
+.vintage-ornament::before {
+  left: -2rem;
+}
+
+.vintage-ornament::after {
+  right: -2rem;
+}
+
+/* Vintage paper texture effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Vintage box shadow for depth */
+.vintage-shadow {
+  box-shadow: 
+    0 2px 4px rgba(74, 52, 39, 0.1),
+    0 4px 8px rgba(74, 52, 39, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }

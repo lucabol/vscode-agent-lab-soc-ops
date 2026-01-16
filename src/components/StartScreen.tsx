@@ -4,26 +4,53 @@ interface StartScreenProps {
 
 export function StartScreen({ onStart }: StartScreenProps) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-full p-6 bg-gray-50">
-      <div className="text-center max-w-sm">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">Soc Ops</h1>
-        <p className="text-lg text-gray-600 mb-8">Social Bingo</p>
+    <div className="flex flex-col items-center justify-center min-h-full p-6 bg-vintage-cream animate-fade-in">
+      <div className="text-center max-w-md">
+        {/* Ornamental top border */}
+        <div className="mb-6 text-vintage-gold text-2xl">✦ ✦ ✦</div>
         
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-8">
-          <h2 className="font-semibold text-gray-800 mb-3">How to play</h2>
-          <ul className="text-left text-gray-600 text-sm space-y-2">
-            <li>• Find people who match the questions</li>
-            <li>• Tap a square when you find a match</li>
-            <li>• Get 5 in a row to win!</li>
+        <h1 className="text-6xl font-display font-bold text-vintage-burgundy mb-3 tracking-wide" style={{ fontFamily: 'var(--font-display)' }}>
+          Soc Ops
+        </h1>
+        <div className="flex items-center justify-center gap-3 mb-8">
+          <div className="h-px bg-vintage-border flex-1"></div>
+          <p className="text-xl text-vintage-brown font-display italic">Social Bingo</p>
+          <div className="h-px bg-vintage-border flex-1"></div>
+        </div>
+        
+        <div className="bg-vintage-paper rounded-sm p-8 vintage-shadow border-4 border-double border-vintage-border mb-10 relative">
+          {/* Corner decorations */}
+          <div className="absolute top-2 left-2 text-vintage-gold text-xl">❧</div>
+          <div className="absolute top-2 right-2 text-vintage-gold text-xl">❧</div>
+          <div className="absolute bottom-2 left-2 text-vintage-gold text-xl">❧</div>
+          <div className="absolute bottom-2 right-2 text-vintage-gold text-xl">❧</div>
+          
+          <h2 className="font-display font-bold text-vintage-burgundy mb-4 text-xl">How to Play</h2>
+          <ul className="text-left text-vintage-brown space-y-3 text-lg font-body">
+            <li className="flex items-start gap-2">
+              <span className="text-vintage-gold">❖</span>
+              <span>Find people who match the questions</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-vintage-gold">❖</span>
+              <span>Tap a square when you find a match</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-vintage-gold">❖</span>
+              <span>Get 5 in a row to win!</span>
+            </li>
           </ul>
         </div>
 
         <button
           onClick={onStart}
-          className="w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors"
+          className="w-full bg-vintage-burgundy text-vintage-cream font-display font-bold py-5 px-10 rounded-sm text-xl border-2 border-vintage-burgundy-dark active:bg-vintage-burgundy-dark transition-all vintage-shadow tracking-wide uppercase"
         >
-          Start Game
+          Begin Game
         </button>
+        
+        {/* Ornamental bottom border */}
+        <div className="mt-6 text-vintage-gold text-2xl">✦ ✦ ✦</div>
       </div>
     </div>
   );
