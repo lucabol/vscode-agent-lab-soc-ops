@@ -19,11 +19,12 @@ export function StartScreen({ onStart }: StartScreenProps) {
           <p className="text-sm leading-relaxed">Complete five in a row to win</p>
         </div>
 
+        {/* CTA Button */}
         <button
           onClick={onStart}
           className="w-full border-2 border-mono-900 bg-mono-900 text-mono-50 font-medium py-4 px-8 text-sm uppercase tracking-[0.15em] transition-all duration-200 hover:bg-mono-950 active:scale-[0.98]"
         >
-          Start Game
+          <span className="relative">Start Game</span>
         </button>
       </div>
     </div>
