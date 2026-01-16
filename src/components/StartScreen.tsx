@@ -9,7 +9,7 @@ export function StartScreen({ onStart }: StartScreenProps) {
         {/* Ornamental top border */}
         <div className="mb-6 text-vintage-gold text-2xl">✦ ✦ ✦</div>
         
-        <h1 className="text-6xl font-display font-bold text-vintage-burgundy mb-3 tracking-wide" style={{ fontFamily: 'var(--font-display)' }}>
+        <h1 className="text-6xl font-display font-bold text-vintage-burgundy mb-3 tracking-wide">
           Soc Ops
         </h1>
         <div className="flex items-center justify-center gap-3 mb-8">
