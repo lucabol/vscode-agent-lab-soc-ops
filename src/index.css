@@ -36,22 +36,6 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Typewriter animation for title */
-@keyframes typewriter {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes blink {
-  50% {
-    border-color: transparent;
-  }
-}
-
 /* Staggered fade-in with slight rotation */
 @keyframes fadeInRotate {
   from {
