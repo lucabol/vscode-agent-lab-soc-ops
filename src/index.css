@@ -1,27 +1,19 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Display font */
-  --font-display: "Cabinet Grotesk", system-ui, sans-serif;
+  --color-mono-50: #fafafa;
+  --color-mono-100: #f5f5f5;
+  --color-mono-200: #e5e5e5;
+  --color-mono-300: #d4d4d4;
+  --color-mono-400: #a3a3a3;
+  --color-mono-500: #737373;
+  --color-mono-600: #525252;
+  --color-mono-700: #404040;
+  --color-mono-800: #262626;
+  --color-mono-900: #171717;
+  --color-mono-950: #0a0a0a;
   
-  /* Retro Social color palette */
-  --color-cream: #fffbeb;
-  --color-cream-dark: #fef7ed;
-  --color-terracotta: #ea580c;
-  --color-terracotta-dark: #c2410c;
-  --color-mustard: #ca8a04;
-  --color-mustard-light: #eab308;
-  --color-forest: #15803d;
-  --color-forest-dark: #166534;
-  --color-warm-text: #292524;
-  --color-warm-text-light: #44403c;
-  
-  /* Existing colors for game board */
-  --color-accent: #2563eb;
-  --color-accent-light: #3b82f6;
-  --color-marked: #dcfce7;
-  --color-marked-border: #22c55e;
-  --color-bingo: #fbbf24;
+  --font-display: 'JetBrains Mono', 'Fira Code', 'IBM Plex Mono', 'Courier New', monospace;
 }
 
 html,
@@ -32,8 +24,9 @@ body,
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-display);
   -webkit-tap-highlight-color: transparent;
+  letter-spacing: -0.01em;
 }
 
 /* Staggered fade-in with slight rotation */
