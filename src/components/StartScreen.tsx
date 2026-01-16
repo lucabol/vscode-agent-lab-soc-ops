@@ -23,20 +23,27 @@ export function StartScreen({ onStart }: StartScreenProps) {
       <div className="relative text-center max-w-lg z-10">
         {/* Title with staggered animation */}
         <h1 className="mb-2 font-display text-7xl md:text-8xl font-extrabold tracking-tight" aria-label={title}>
-          {title.split('').map((letter, index) => (
-            <span
-              key={index}
-              className="inline-block"
-              style={{
-                animation: 'titleStagger 0.6s ease-out forwards',
-                animationDelay: `${index * 0.08}s`,
-                opacity: 0,
-                color: index < 3 ? '#ec4899' : index < 4 ? '#facc15' : '#22d3d5'
-              }}
-            >
-              {letter === ' ' ? '\u00A0' : letter}
-            </span>
-          ))}
+          {title.split('').map((letter, index) => {
+            let color;
+            if (index < 3) color = 'var(--color-party-pink)';
+            else if (index < 4) color = 'var(--color-party-yellow)';
+            else color = 'var(--color-party-cyan)';
+            
+            return (
+              <span
+                key={index}
+                className="inline-block"
+                style={{
+                  animation: 'titleStagger 0.6s ease-out forwards',
+                  animationDelay: `${index * 0.08}s`,
+                  opacity: 0,
+                  color
+                }}
+              >
+                {letter === ' ' ? '\u00A0' : letter}
+              </span>
+            );
+          })}
         </h1>
         
         {/* Subtitle */}

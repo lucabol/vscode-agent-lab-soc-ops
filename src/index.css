@@ -72,6 +72,11 @@
   }
 }
 
+/* Custom utility classes */
+.bg-gradient-radial {
+  background-image: radial-gradient(circle, transparent, transparent, rgba(0, 0, 0, 0.3));
+}
+
 html,
 body,
 #root {
