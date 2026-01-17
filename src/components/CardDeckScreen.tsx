@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { CardData } from '../types';
 
 interface CardDeckScreenProps {
@@ -17,8 +18,21 @@ export function CardDeckScreen({
   onFail,
   onReset,
 }: CardDeckScreenProps) {
+  const [announcement, setAnnouncement] = useState('');
+
+  const handlePass = () => {
+    onPass();
+    setAnnouncement('Match recorded');
+  };
+
+  const handleFail = () => {
+    onFail();
+    setAnnouncement('Card skipped');
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-full p-6 bg-mono-50">
+      <div className="sr-only" role="status" aria-live="polite">{announcement}</div>
       {/* Header */}
       <div className="absolute top-6 left-0 right-0 text-center">
         <h1 className="text-lg font-normal text-mono-400 uppercase tracking-[0.15em]">
@@ -68,20 +82,24 @@ export function CardDeckScreen({
         }`}
       >
         <button
-          onClick={onFail}
+          onClick={handleFail}
+          disabled={!isFlipped}
+          aria-hidden={!isFlipped}
           className="w-16 h-16 rounded-full border-2 border-red-200 bg-red-50 text-red-400 flex items-center justify-center hover:border-red-300 hover:bg-red-100 transition-all active:scale-95"
           aria-label="No match found"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
         <button
-          onClick={onPass}
+          onClick={handlePass}
+          disabled={!isFlipped}
+          aria-hidden={!isFlipped}
           className="w-16 h-16 rounded-full border-2 border-green-200 bg-green-50 text-green-500 flex items-center justify-center hover:border-green-300 hover:bg-green-100 transition-all active:scale-95"
           aria-label="Match found"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </button>
