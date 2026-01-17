@@ -24,7 +24,7 @@ function App() {
     progress,
     showCompleteModal,
     startGame: startScavengerGame,
-    handleItemClick,
+    toggleItem,
     resetGame: resetScavengerGame,
     dismissModal: dismissScavengerModal,
   } = useScavengerGame();
@@ -47,7 +47,7 @@ function App() {
           items={items}
           progress={progress}
           isComplete={scavengerGameState === 'scavenger-complete'}
-          onItemClick={handleItemClick}
+          onItemClick={toggleItem}
           onReset={resetScavengerGame}
         />
         {showCompleteModal && (
