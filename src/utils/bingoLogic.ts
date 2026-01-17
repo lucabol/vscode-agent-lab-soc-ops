@@ -1,23 +1,12 @@
 import { questions, FREE_SPACE } from '../data/questions';
 import type { BingoSquareData, BingoLine } from '../types';
+import { shuffleArray } from './shuffle';
 
 // Re-export types for convenience
 export type { BingoSquareData, BingoLine } from '../types';
 
 const BOARD_SIZE = 5;
 const CENTER_INDEX = 12; // 5x5 grid, center is index 12 (row 2, col 2)
-
-/**
- * Shuffle an array using Fisher-Yates algorithm
- */
-function shuffleArray<T>(array: T[]): T[] {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
 
 /**
  * Generate a new 5x5 bingo board

@@ -1,4 +1,4 @@
-import type { ScavengerItemData } from '../utils/scavengerLogic';
+import type { ScavengerItemData } from '../types';
 
 interface ScavengerItemProps {
   item: ScavengerItemData;

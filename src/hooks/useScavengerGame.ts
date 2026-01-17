@@ -1,13 +1,14 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
-import type { ScavengerItemData } from '../utils/scavengerLogic';
+import type { ScavengerItemData, ScavengerGameState } from '../types';
 import {
   generateChecklist,
   toggleItem,
   calculateProgress,
   isComplete,
 } from '../utils/scavengerLogic';
+import { loadFromStorage, saveToStorage, type StorageConfig } from '../utils/storage';
 
-export type ScavengerGameState = 'start' | 'scavenger-playing' | 'scavenger-complete';
+export type { ScavengerGameState } from '../types';
 
 export interface ScavengerGameHookState {
   gameState: ScavengerGameState;
@@ -68,57 +69,14 @@ function validateStoredData(data: unknown): data is StoredGameData {
   return true;
 }
 
-function loadGameState(): Pick<StoredGameData, 'gameState' | 'items'> | null {
-  if (typeof window === 'undefined') {
-    return null;
-  }
-
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (!saved) {
-      return null;
-    }
-
-    const parsed = JSON.parse(saved);
-    
-    if (validateStoredData(parsed)) {
-      return {
-        gameState: parsed.gameState,
-        items: parsed.items,
-      };
-    } else {
-      console.warn('Invalid scavenger game state data in localStorage, clearing...');
-      localStorage.removeItem(STORAGE_KEY);
-    }
-  } catch (error) {
-    console.warn('Failed to load scavenger game state:', error);
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem(STORAGE_KEY);
-    }
-  }
-
-  return null;
-}
-
-function saveGameState(gameState: ScavengerGameState, items: ScavengerItemData[]): void {
-  if (typeof window === 'undefined') {
-    return;
-  }
-
-  try {
-    const data: StoredGameData = {
-      version: STORAGE_VERSION,
-      gameState,
-      items,
-    };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  } catch (error) {
-    console.warn('Failed to save scavenger game state:', error);
-  }
-}
+const storageConfig: StorageConfig<StoredGameData> = {
+  key: STORAGE_KEY,
+  version: STORAGE_VERSION,
+  validate: validateStoredData,
+};
 
 export function useScavengerGame(): ScavengerGameHookState & ScavengerGameActions {
-  const loadedState = useMemo(() => loadGameState(), []);
+  const loadedState = useMemo(() => loadFromStorage(storageConfig), []);
 
   const [gameState, setGameState] = useState<ScavengerGameState>(
     () => loadedState?.gameState || 'start'
@@ -132,7 +90,12 @@ export function useScavengerGame(): ScavengerGameHookState & ScavengerGameAction
 
   // Save game state to localStorage whenever it changes
   useEffect(() => {
-    saveGameState(gameState, items);
+    const data: StoredGameData = {
+      version: STORAGE_VERSION,
+      gameState,
+      items,
+    };
+    saveToStorage(STORAGE_KEY, data);
   }, [gameState, items]);
 
   const startGame = useCallback(() => {

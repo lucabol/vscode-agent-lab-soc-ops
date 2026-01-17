@@ -1,23 +1,9 @@
 import { questions } from '../data/questions';
+import type { ScavengerItemData } from '../types';
+import { shuffleArray } from './shuffle';
 
 // Re-export type for convenience
-export interface ScavengerItemData {
-  id: number;
-  text: string;
-  isChecked: boolean;
-}
-
-/**
- * Shuffle an array using Fisher-Yates algorithm
- */
-function shuffleArray<T>(array: T[]): T[] {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
+export type { ScavengerItemData } from '../types';
 
 /**
  * Generate a shuffled checklist of scavenger hunt items

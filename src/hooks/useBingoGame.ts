@@ -6,6 +6,7 @@ import {
   checkBingo,
   getWinningSquareIds,
 } from '../utils/bingoLogic';
+import { loadFromStorage, saveToStorage, type StorageConfig } from '../utils/storage';
 
 export interface BingoGameState {
   gameState: GameState;
@@ -84,61 +85,14 @@ function validateStoredData(data: unknown): data is StoredGameData {
   return true;
 }
 
-function loadGameState(): Pick<BingoGameState, 'gameState' | 'board' | 'winningLine'> | null {
-  // SSR guard
-  if (typeof window === 'undefined') {
-    return null;
-  }
-
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (!saved) {
-      return null;
-    }
-
-    const parsed = JSON.parse(saved);
-    
-    if (validateStoredData(parsed)) {
-      return {
-        gameState: parsed.gameState,
-        board: parsed.board,
-        winningLine: parsed.winningLine,
-      };
-    } else {
-      console.warn('Invalid game state data in localStorage, clearing...');
-      localStorage.removeItem(STORAGE_KEY);
-    }
-  } catch (error) {
-    console.warn('Failed to load game state:', error);
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem(STORAGE_KEY);
-    }
-  }
-
-  return null;
-}
-
-function saveGameState(gameState: GameState, board: BingoSquareData[], winningLine: BingoLine | null): void {
-  // SSR guard
-  if (typeof window === 'undefined') {
-    return;
-  }
-
-  try {
-    const data: StoredGameData = {
-      version: STORAGE_VERSION,
-      gameState,
-      board,
-      winningLine,
-    };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  } catch (error) {
-    console.warn('Failed to save game state:', error);
-  }
-}
+const storageConfig: StorageConfig<StoredGameData> = {
+  key: STORAGE_KEY,
+  version: STORAGE_VERSION,
+  validate: validateStoredData,
+};
 
 export function useBingoGame(): BingoGameState & BingoGameActions {
-  const loadedState = useMemo(() => loadGameState(), []);
+  const loadedState = useMemo(() => loadFromStorage(storageConfig), []);
 
   const [gameState, setGameState] = useState<GameState>(
     () => loadedState?.gameState || 'start'
@@ -158,7 +112,13 @@ export function useBingoGame(): BingoGameState & BingoGameActions {
 
   // Save game state to localStorage whenever it changes
   useEffect(() => {
-    saveGameState(gameState, board, winningLine);
+    const data: StoredGameData = {
+      version: STORAGE_VERSION,
+      gameState,
+      board,
+      winningLine,
+    };
+    saveToStorage(STORAGE_KEY, data);
   }, [gameState, board, winningLine]);
 
   const startGame = useCallback(() => {
