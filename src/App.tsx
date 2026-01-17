@@ -1,10 +1,12 @@
 import { useBingoGame } from './hooks/useBingoGame';
 import { useScavengerGame } from './hooks/useScavengerGame';
+import { useCardDeckGame } from './hooks/useCardDeckGame';
 import { StartScreen } from './components/StartScreen';
 import { GameScreen } from './components/GameScreen';
 import { BingoModal } from './components/BingoModal';
 import { ScavengerScreen } from './components/ScavengerScreen';
 import { ScavengerModal } from './components/ScavengerModal';
+import { CardDeckScreen } from './components/CardDeckScreen';
 
 function App() {
   const {
@@ -29,12 +31,43 @@ function App() {
     dismissModal: dismissScavengerModal,
   } = useScavengerGame();
 
-  // Show start screen if neither game is active
-  if (bingoGameState === 'start' && scavengerGameState === 'start') {
+  const {
+    gameState: cardDeckGameState,
+    currentCard,
+    isFlipped,
+    startGame: startCardDeckGame,
+    flipCard,
+    drawNextCard,
+    resetGame: resetCardDeckGame,
+  } = useCardDeckGame();
+
+  // Show start screen if no game is active
+  if (bingoGameState === 'start' && scavengerGameState === 'start' && cardDeckGameState === 'start') {
     return (
       <StartScreen 
         onStartBingo={startBingoGame} 
-        onStartScavenger={startScavengerGame} 
+        onStartScavenger={startScavengerGame}
+        onStartCardDeck={startCardDeckGame}
+      />
+    );
+  }
+
+  // Card Deck mode
+  if (cardDeckGameState === 'card-ready' || cardDeckGameState === 'card-revealed') {
+    const handleCardClick = () => {
+      if (!isFlipped) {
+        flipCard();
+      }
+    };
+
+    return (
+      <CardDeckScreen
+        currentCard={currentCard}
+        isFlipped={isFlipped}
+        onCardClick={handleCardClick}
+        onPass={drawNextCard}
+        onFail={drawNextCard}
+        onReset={resetCardDeckGame}
       />
     );
   }

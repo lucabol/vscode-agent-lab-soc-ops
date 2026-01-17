@@ -1,9 +1,10 @@
 interface StartScreenProps {
   onStartBingo: () => void;
   onStartScavenger: () => void;
+  onStartCardDeck: () => void;
 }
 
-export function StartScreen({ onStartBingo, onStartScavenger }: StartScreenProps) {
+export function StartScreen({ onStartBingo, onStartScavenger, onStartCardDeck }: StartScreenProps) {
   return (
     <div className="flex flex-col items-center justify-center min-h-full p-8 bg-mono-50">
       <div className="text-center max-w-md w-full">
@@ -32,6 +33,12 @@ export function StartScreen({ onStartBingo, onStartScavenger }: StartScreenProps
             className="w-full border-2 border-mono-900 bg-mono-50 text-mono-900 font-medium py-4 px-8 text-sm uppercase tracking-[0.15em] transition-all duration-200 hover:bg-mono-100 active:scale-[0.98]"
           >
             <span className="relative">Scavenger Hunt</span>
+          </button>
+          <button
+            onClick={onStartCardDeck}
+            className="w-full border-2 border-mono-900 bg-mono-50 text-mono-900 font-medium py-4 px-8 text-sm uppercase tracking-[0.15em] transition-all duration-200 hover:bg-mono-100 active:scale-[0.98]"
+          >
+            <span className="relative">Card Deck</span>
           </button>
         </div>
       </div>

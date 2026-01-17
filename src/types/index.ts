@@ -24,3 +24,11 @@ export interface ScavengerItemData {
 }
 
 export type ScavengerGameState = 'start' | 'scavenger-playing' | 'scavenger-complete';
+
+/** Domain types for the Card Deck game */
+
+export interface CardData {
+  text: string;
+}
+
+export type CardDeckGameState = 'start' | 'card-ready' | 'card-revealed';
